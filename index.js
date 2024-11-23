@@ -11,6 +11,7 @@ import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import AssignmentRoutes from "./Kanbas/Assignments/routes.js";
 import EnrollmentRoutes from "./Kanbas/Enrollments/routes.js";
 const app = express();
+console.log(process.env.NETLIFY_URL)
 app.use(
     cors({
       credentials: true,
