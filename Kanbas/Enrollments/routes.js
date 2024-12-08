@@ -22,7 +22,7 @@ export default function EnrollmentRoutes(app) {
     res.json(enrollments);
   };
   const enrollStudentInCourse = async (req, res) => {
-    const enrollment = await dao.enrollStudentInCourse(
+    const enrollment = await dao.enrollUserInCourse(
       req.params.userId,
       req.params.courseId
     );
@@ -30,7 +30,7 @@ export default function EnrollmentRoutes(app) {
   };
 
   const unenrollStudentFromCourse = async (req, res) => {
-    const status = await dao.unenrollStudentFromCourse(
+    const status = await dao.unenrollUserFromCourse(    
       req.params.userId,
       req.params.courseId
     );
@@ -42,4 +42,4 @@ export default function EnrollmentRoutes(app) {
   app.get("/api/users/:userId/courses", findCoursesEnrolledByStudent);
   app.post("/api/users/:userId/courses/:courseId/enroll", enrollStudentInCourse);
   app.delete("/api/users/:userId/courses/:courseId/enroll", unenrollStudentFromCourse);
-}
+} 
