@@ -1,21 +1,13 @@
 import mongoose from "mongoose";
-const assignmentSchema = new mongoose.Schema(
+const schema = new mongoose.Schema(
   {
-    _id: String,
-    title: { type: String, required: true },
-    course: { 
-      type: mongoose.Schema.Types.Mixed, 
-      ref: "CourseModel",
-      required: true 
-    },
+    title: String,
     description: String,
-    points: { type: Number, default: 100 },
-    dueDate: Date,
-    availableFromDate: Date,
-    availableUntilDate: Date,
-    published: { type: Boolean, default: false }
+    point: Number,
+    dueDate: String,
+    availableDate: String,
+    course: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModel" },
   },
   { collection: "assignments" }
 );
-
-export default assignmentSchema;
+export default schema;
