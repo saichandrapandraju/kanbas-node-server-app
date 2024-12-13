@@ -21,7 +21,7 @@ const schema = new mongoose.Schema(
     dueDate: String,
     availableDate: String,
     untilDate: String,
-    course: { type: mongoose.Schema.Types.ObjectId, ref: "CourseModel" },
+    course: { type: mongoose.Schema.Types.Mixed, ref: "CourseModel" },
   },
   { collection: "quizzes" }
 );

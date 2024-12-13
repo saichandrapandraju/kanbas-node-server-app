@@ -3,7 +3,7 @@ export function findModulesForCourse(courseId) {
   return model.find({ course: courseId });
 }
 export function createModule(module) {
-  delete module._id;
+  // delete module._id;
   return model.create(module);
 }
 export function deleteModule(moduleId) {

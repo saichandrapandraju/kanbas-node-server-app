@@ -3,7 +3,7 @@ export function findAssignmentsForCourse(courseId) {
   return model.find({ course: courseId });
 }
 export function createAssignment(assignment) {
-  delete assignment._id;
+  // delete assignment._id;
   return model.create(assignment);
 }
 export function deleteAssignment(assignmentId) {

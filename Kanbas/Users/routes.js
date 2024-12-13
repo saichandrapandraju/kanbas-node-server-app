@@ -63,7 +63,11 @@ export default function UserRoutes(app) {
   const signin = async (req, res) => {
     const { username, password } = req.body;
     const currentUser = await dao.findUserByCredentials(username, password);
+    console.log(currentUser);
+    req.session["currentUser"] = currentUser;
+    console.log(req.session)
     if (currentUser) {
+      // alert("in");
       req.session["currentUser"] = currentUser;
       res.json(currentUser);
     } else {
@@ -120,20 +124,28 @@ export default function UserRoutes(app) {
 
   const findCoursesForUser = async (req, res) => {
     const currentUser = req.session["currentUser"];
+    console.log(req.session)
+    console.log(currentUser);
     if (!currentUser) {
       res.sendStatus(401);
       return;
     }
     if (currentUser.role === "ADMIN") {
-      const courses = await courseDao.findAllCourses();
+      var courses = await courseDao.findAllCourses();
+      // filter out undefined/null courses
+      courses = courses.filter(course => course !== undefined && course !== null);
+      console.log(courses);
       res.json(courses);
       return;
-    }
+    } 
     let { uid } = req.params;
     if (uid === "current") {
       uid = currentUser._id;
     }
-    const courses = await enrollmentsDao.findCoursesForUser(uid);
+    var courses = await enrollmentsDao.findCoursesForUser(uid);
+    // filter out undefined/null courses
+    courses = courses.filter(course => course !== undefined && course !== null);
+    console.log(courses);
     res.json(courses);
   };
   app.get("/api/users/:uid/courses", findCoursesForUser);

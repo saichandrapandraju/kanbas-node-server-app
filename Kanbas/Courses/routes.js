@@ -3,6 +3,8 @@ import * as modulesDao from "../Modules/dao.js";
 import * as assignmentsDao from "../Assignments/dao.js";
 import * as enrollmentsDao from "../Enrollments/dao.js";
 import * as quizzesDao from "../Quizzes/dao.js";
+import { v4 as uuidv4 } from "uuid";
+
 export default function CourseRoutes(app) {
   app.get("/api/courses", async (req, res) => {
     const courses = await dao.findAllCourses();
@@ -41,7 +43,9 @@ export default function CourseRoutes(app) {
     const module = {
       ...req.body,
       course: courseId,
+      _id: uuidv4(),
     };
+    console.log(module);
     const newModule = await modulesDao.createModule(module);
     res.send(newModule);
   });
@@ -56,6 +60,7 @@ export default function CourseRoutes(app) {
     const assignment = {
       ...req.body,
       course: courseId,
+      _id: uuidv4(),
     };
     const newAssignemnt = await assignmentsDao.createAssignment(assignment);
     res.send(newAssignemnt);
@@ -71,6 +76,7 @@ export default function CourseRoutes(app) {
     const quiz = {
       ...req.body,
       course: courseId,
+      _id: uuidv4(),
     };
     const newQuiz = await quizzesDao.createQuiz(quiz);
     res.send(newQuiz);
